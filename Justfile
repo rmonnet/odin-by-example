@@ -37,7 +37,11 @@ vet:
 @run-examples:
     for example in examples/*/; do \
       echo "\$ odin run $example" > "$example/output.txt"; \
-      odin run $example >>$example/output.txt 2>&1; \
+      odin run $example >>$example/output.txt; \
+      md_file=$(basename $example); \
+      if [ -f "content/docs/examples/$md_file.md" ]; then \
+        touch "content/docs/examples/$md_file.md"; \
+      fi; \
     done
 
 # Preview the HTML documentation
@@ -47,3 +51,10 @@ vet:
 # Generate the HTML documentation website
 @doc-build: run-examples
     hugo
+
+# Create an example
+@add-example name:
+    [ -f "content/docs/examples/{{ name }}.md" ] && { echo "Error: {{ name }} already exists!"; exit 1; } || true
+    cp templates/xxx.md "content/docs/examples/{{ name }}.md"
+    mkdir "examples/{{ name }}"
+    cp templates/xxx.odin "examples/{{ name }}/{{ name }}.odin"

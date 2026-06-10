@@ -4,17 +4,26 @@ layout: landing
 
 <div class="book-hero">
 
-# Documentation {anchor=false}
-This content is rendered from `content/index.md`
+# Odin By Example {anchor=false}
 
-{{<button href="/docs/">}}Action{{</button>}}
+Odin is a general-purpose programming language designed to fix C's annoyances.
+It is perfect for high performance systems and data programming.
+
+Learn more at the official [Odin Website](https://odin-lang.org/)
+
 
 </div>
 
 {{% columns %}}
-- ## Nunc infans rigidique etiam
-  Lorem markdownum quondam mediamque visis aevi, peregrinaeque Aeacidae, vita vos? Iacet exhortatus picta plures; placet Pandrose tremescere; mediis aera enim resonat scinditur dea nocuit fabrilis est per. Signum pater paventes pectore maris humo, aegide illos religarat si! Romana secutis erat, cum omnia vincere virtutem nomine ascensu poenas? Gradus cum quoque potitur.
+- ## Odin Features by Example
+  Following the adage that a picture is worth a thousand words, this section illustrates Odin's features through a set of examples.
+  It focuses on Odin the language. If you want to learn Odin or see how to use a feature, this is the place to start.
 
-- ## Carmina fallacia polluit lenta
-  Lorem markdownum, omnes exire lumen noctis concava multaque fieri inplevere oculi *nisi sua* subigebat iamque? Herse sum `hardBox`, pervenit linguae altera. Clymenen magna illi latera parent omnia felicia ter bifurcum nulla atque alta cannas ita? Pariter stetit carina adspexerit spargentem festa concrevit `process_upnp` primos! Huic et sulphure paelice iuppiter vitat quem genitas, fera vertice relinque.
+  {{<button href="/docs/examples">}}Go to Examples{{</button>}}
+
+- ## Odin In the Wild 
+  This section includes short but interesting programs that showcase the use of Odin with real problems.
+  Most of the examples are simulations or graphic demos, taking advantage of Odin battery-included graphic capabilities.
+
+  {{<button href="/docs/">}}Go to Programs{{</button>}}
 {{% /columns %}}

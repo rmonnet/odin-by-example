@@ -1,8 +1,8 @@
 baseURL: http://0.0.0.0:1313/
-title: Documentation
+title: Odin by Example
 theme: hugo-book
 
-copyright: "This is a copyright placeholder"
+copyright: "(c) 2026 Robert Monnet"
 
 # Book configuration
 disablePathToLower: true
@@ -16,7 +16,9 @@ markup:
   tableOfContents:
     startLevel: 1
   highlight:
-    style: base16-snazzy
+    style: catppuccin-frappe
+    lineNos: true
+    lineNumbersInTable: true
 
 # Multi-lingual mode config
 # There are different options to translate files
@@ -74,7 +76,7 @@ params:
   # BookLogo: /logo.png
 
   # (Optional, default docs) Specify root page to render child pages as menu.
-  # Page is resoled by .GetPage function: https://gohugo.io/functions/getpage/
+  # Page is resolved by .GetPage function: https://gohugo.io/functions/getpage/
   # For backward compatibility you can set '*' to render all sections to menu. Acts same as '/'
   # BookSection: docs
 
@@ -110,13 +112,22 @@ params:
   # Portable links meant to work with text editors and let you write markdown without {{< relref >}} shortcode
   # Theme will print warning or error if page referenced in markdown does not exists.
   # Possible values are false | 'warning' | 'error'
-  BookPortableLinks: 'warning'
+  BookPortableLinks: "warning"
 
   # /!\ This is an experimental feature, might be removed or changed at any time
   # (Optional, experimental, default false) Enables service worker that caches visited pages and resources for offline use.
   # can be false, true or 'precache', precache will try to download all content pages on install.
-  BookServiceWorker: 'precache'
+  BookServiceWorker: "precache"
 
   # /!\ This is an experimental feature, might be removed or changed at any time
   # (Optional, experimental, default false) Enables a drop-down menu for translations only if a translation is present.
   BookTranslatedOnly: false
+
+security:
+  exec:
+    allow:
+      - "^odin$"
+      - "^bash$"
+      - "^git$"
+    osEnv:
+      - "(?i)^path$"
