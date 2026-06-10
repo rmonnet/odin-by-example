@@ -1,0 +1,23 @@
+{{ $file := .Get "file" }}
+{{ $lang := .Get "lang" | default "text" }}
+{{ $start := .Get "start" | default 0 | int }}
+{{ $end := .Get "end" | default 0 | int }}
+
+{{ $content := readFile $file | string }}
+{{ $lines := replace $content "\r\n" "\n" }}
+{{ $lines = split $lines "\n" }}
+
+{{ if and (gt $start 0) (gt $end 0) }}
+{{ $lines = first $end $lines }}
+{{ $lines = last (sub $end (sub $start 1)) $lines }}
+  {{/* $lines = slice $lines (sub $start 1) $end */}}
+{{ end }}
+
+{{ $code := delimit $lines "\n" }}
+{{ if eq $lang "text" }}
+  <div class="command-output">
+    <pre>{{ $code }}</pre>
+  </div>
+{{ else }}
+  {{ transform.Highlight $code $lang }}
+{{ end }}
