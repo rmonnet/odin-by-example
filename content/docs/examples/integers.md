@@ -1,17 +1,20 @@
 ---
-weight: 999
+weight: 3
 ---
 # Integers
 
 Odin strives to provide a precise set of types to support day-to-day and low-level programming.
 
-{{< code-snippet file="examples/integers/integers.odin" lang="odin" >}}
+{{< code-snippet file="examples/integers/integers.odin" lang="odin" start="7" end="34" >}}
 
 Odin supports platform dependents integer types, signed (`int`) and unsigned (`uint`).
 It also supports explicitly sized signed (`i8`, `i16`, `i32`, `i64`, `i128`) and unsigned (`u8`, `u16`, `u32`, `u64`, `u128`) integers.
 
+Note that Odin integer literals don't have a suffix indicating the type (as you would find in C/C++).
+Instead Odin treat them as untyped integer literal and will convert them to whatever the type of the variable is, as long as the conversion doesn't cause loss of precision.
+
 The types `byte` and `rune` are aliases for `u8` and `i32` and are used to support ASCII and Unicode characters.
-Odin also supports a raw pointer type (`uintptr`) large enough to contain any pointer on the given platform.
+Odin also supports an integer type (`uintptr`) large enough to contain any pointer on the given platform.
 
 There is no implicit conversion in Odin (contrary to C).
 All conversion must be made explicit with:

@@ -1,4 +1,4 @@
-package XXX
+package xxx
 
 import "core:fmt"
 

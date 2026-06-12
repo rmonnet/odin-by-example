@@ -1,0 +1,40 @@
+{{ $file := .Get "file" }}
+{{ $proc := .Get "proc" | default "" }}
+
+{{ $content := readFile $file | string }}
+{{ $lines := replace $content "\r\n" "\n" }}
+{{ $lines = split $lines "\n" }}
+
+{{ $inProc := false }}
+{{ $depth := 1 }}
+{{ $start := 0 }}
+{{ $end := 0 }}
+
+{{ $len := len $lines }}
+{{ range $i := seq 0 (sub $len 1) }}
+    {{ $line := index $lines ($i | int) }}
+    {{ if and (not $inProc) (strings.Contains $line (printf "%s ::" $proc)) }}
+      {{ $start = (add $i 2) }}
+      {{ $inProc = true }}
+    {{ else if $inProc }}
+      {{ if strings.Contains $line "{" }}
+        {{ $depth = add $depth 1 }}
+      {{ end }}
+      {{ if strings.Contains $line "}" }}
+        {{ $depth = sub $depth 1 }}
+        {{ if eq $depth 0 }}
+          {{ $inProc = false }}
+          {{ $end = $i }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+{{ end }}
+
+{{ if and (gt $start 0) (gt $end 0) }}
+{{ $lines = first $end $lines }}
+{{ $lines = last (sub $end (sub $start 1)) $lines }}
+  {{/* $lines = slice $lines (sub $start 1) $end */}}
+{{ end }}
+
+{{ $code := delimit $lines "\n" }}
+{{ transform.Highlight $code "odin" }}

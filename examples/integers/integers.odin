@@ -1,4 +1,4 @@
-package XXX
+package xintegers
 
 import "core:fmt"
 
@@ -21,6 +21,7 @@ main :: proc() {
 	// The following line would generate a compile error:
 	// `Cannot assign value 'b' of type 'uint' to 'int' in assignment`
 	// a = b
+	//
 	b1 := int(b)
 	d1 := cast(i32)d
 	r1: rune = auto_cast q

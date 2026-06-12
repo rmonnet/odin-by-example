@@ -37,7 +37,7 @@ vet:
 @run-examples:
     for example in examples/*/; do \
       echo "\$ odin run $example" > "$example/output.txt"; \
-      odin run $example >>$example/output.txt; \
+      LANG="en_US.UTF-8" LC_ALL="en_US.UTF-8" odin run $example >>$example/output.txt; \
       md_file=$(basename $example); \
       if [ -f "content/docs/examples/$md_file.md" ]; then \
         touch "content/docs/examples/$md_file.md"; \
@@ -56,5 +56,8 @@ vet:
 @add-example name:
     [ -f "content/docs/examples/{{ name }}.md" ] && { echo "Error: {{ name }} already exists!"; exit 1; } || true
     cp templates/xxx.md "content/docs/examples/{{ name }}.md"
+    sed -i "s/xxx/{{ name }}/g" "content/docs/examples/{{ name }}.md"
+    sed -i "s/XXX/{{ capitalize(name) }}/g" "content/docs/examples/{{ name }}.md"
     mkdir "examples/{{ name }}"
     cp templates/xxx.odin "examples/{{ name }}/{{ name }}.odin"
+    sed -i "s/xxx/x{{ name }}/g" "examples/{{ name }}/{{ name }}.odin"
